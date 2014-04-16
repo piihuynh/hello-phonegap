@@ -4,7 +4,9 @@
 <widget xmlns     = "http://www.w3.org/ns/widgets"
         xmlns:gap = "http://phonegap.com/ns/1.0"
         id        = "com.phonegap.tenisuzivo"
-        version   = "1.0.0">
+        version   = "0.0.2"
+		versionCode = "2"
+>
 
     <name>Tenis Uzivo</name>
 
@@ -44,8 +46,8 @@
     <preference name="auto-hide-splash-screen"    value="false" />           <!-- ios: if set to false, the splash screen must be hidden using a JavaScript API -->
 	
 	<preference name="SplashScreen" value="screen" />
-	<preference name="splash-screen-duration" value="5000" />
-	<preference name="SplashScreenDelay" value="10000" />
+	<preference name="splash-screen-duration" value="5000" /> <!-- Android only -->
+	<preference name="SplashScreenDelay" value="5000" />
 	<preference name="AutoHideSplashScreen" value="false" />
 	
     <preference name="disable-cursor"             value="false" />          <!-- blackberry: prevents a mouse-icon/cursor from being displayed on the app -->
