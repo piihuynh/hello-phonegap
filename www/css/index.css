@@ -41,7 +41,7 @@ body {
     height:100%;
     margin:0px;
     padding:0px;
-    text-transform:uppercase;
+    /* text-transform:uppercase; */
     width:100%;
 }
 
@@ -68,7 +68,7 @@ body {
                                       /* offset horizontal: half of image width and text area width */
     }
 }
-
+/* 
 h1 {
     font-size:24px;
     font-weight:normal;
@@ -76,7 +76,7 @@ h1 {
     overflow:visible;
     padding:0px;
     text-align:center;
-}
+} */
 
 .event {
     border-radius:4px;
@@ -113,3 +113,31 @@ h1 {
     animation:fade 3000ms infinite;
     -webkit-animation:fade 3000ms infinite;
 }
+
+/* NEW */
+
+@media screen and (max-width: 768px) {
+	#master_wrap{
+		padding-top: 45px !important;
+	}
+		#header{
+			position: fixed !important;
+			position: sticky /*iOS 7*/;
+			top: 0;
+			left: 0;
+			right: 0;
+			bottom: auto;
+			z-index: 10;
+			background: #DDD;
+		}
+}/*@media screen and (max-width: 768px)*/
+
+#nav_back_button{
+	float:left;
+	margin-top:1px;
+	margin-right:20px;
+}
+
+#app_pages{}
+	.app_page{display: none}
+	.app_page.active{display: block}

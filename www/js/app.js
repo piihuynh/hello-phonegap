@@ -6,116 +6,11 @@ function startapp($) {
 		// $('#deviceready').remove();
 		$('.app').hide();
 		$('#mainPage').show();
-		/* 
-		$.jsonp({
-			// url: 'http://tenisuzivo/wp-content/plugins/live-score-widget/lsw_scraper.php?jsonp=1&callback=process&xtoken='+xtoken+'&get_live_info=1&max_num_of_matches=99',
-			url: 'http://tenisuzivo/api/get_recent_posts/',
-			// callbackParameter: "callback"
-			success: function (json,textStatus,xOptions) {
-				console.log('success, textStats:',textStatus);
-				console.log('json:',json);
-				console.log(xOptions);
-				alert('success - '+textStatus);
-				appendContent(data);
-			},
-			error: function(xOptions,textStatus){
-				console.log('error, xOptions:',xOptions,' | ',textStatus);
-				alert('error - '+textStatus);
-			},
-			complete: function (xOptions,textStatus) {
-				console.log('complete, textStats:',textStatus);
-				console.log('json:',json);
-				alert('complete - '+textStatus);
-				appendContent(data);
-			},
-			timeout: 10000
-		});
-		 */
-		// var myAjax = new simpleMobileAjax();
-		// myAjax.ajaxRequest('http://tenisuzivo/?jsonp=1&callback=process&xtoken='+xtoken, document.body);
-		// myAjax.ajaxRequest('http://tenisuzivo.com/wp-content/plugins/live-score-widget/lsw_scraper.php?get_live_info=1&callback=process', document.body);
-		// myAjax = null;
-
-		// $( document ).on( "ready", function(){
-			// console.log('before request');
-			/* makeAJAX({
-				type: 'GET',
-				// url: 'http://tenisuzivo/?jsonp=1&callback=process&xtoken='+xtoken,
-				url: 'http://tenisuzivo.com/wp-content/plugins/live-score-widget/lsw_scraper.php?get_live_info=1&callback=process',
-				// url: 'http://tenisuzivo.com/?jsonp=1&callback=process&xtoken='+xtoken,
-				// url: 'http://tenisuzivo.com/wp-content/plugins/live-score-widget/lsw_scraper.php?jsonp=1&callback=process&xtoken='+xtoken,
-				// url: 'http://tenisuzivo/wp-content/plugins/live-score-widget/lsw_scraper.php?jsonp=1&callback=process&xtoken='+xtoken+'&get_live_info=1&max_num_of_matches=99&tz_offset='+(new Date).getTimezoneOffset()+'',
-				// url: 'http://tenisuzivo/wp-content/plugins/live-score-widget/lsw_scraper.php?jsonp=1&callback=process&xtoken='+xtoken+'&get_live_info=1&max_num_of_matches=99',
-				// url: 'http://tenisuzivo/api/get_recent_posts/',
-				success: appendContent,
-			}); */
-			 
-			var postData = {
-						xtoken: xtoken
-						// get_live_info:true
-						// ,max_num_of_matches:99//maxMatches
-						// ,tz_offset:tz_offset
-						// ,last_server_index:last_server_index
-						// ,fdays: forceFDays
-					};
-			$.ajax({
-					// type: 'POST',
-					type: 'GET',
-					// url: "http://tenisuzivo.com/wp-content/plugins/live-score-widget/lsw_scraper.php",
-					// url: 'http://tenisuzivo.com',
-					// url: 'http://tenisuzivo/wp-content/plugins/live-score-widget/crontab-lsw_scraper_today.php?show_log=1&get_raw=107',
-					// url: 'http://tenisuzivo/wp-content/plugins/live-score-widget/lsw_scraper.php?get_live_info=1',
-					// url: 'http://tenisuzivo/wp-content/plugins/live-score-widget/lsw_scraper.php',
-					// url: 'http://tenisuzivo.com/?jsonp=1&callback=process&xtoken='+xtoken,
-					// url: 'http://tenisuzivo/?jsonp=1&callback=process&xtoken='+xtoken,
-					// url: 'http://tenisuzivo.com/wp-content/plugins/live-score-widget/lsw_scraper.php?get_live_info=1&callback=process',
-					// url: 'http://www.tjorndesign.se/mrtest/?jsonp=1&callback=process',
-					url: 'http://tenisuzivo.com/api/get_recent_posts/',
-					// data: postData,
-					// dataType: 'json',
-					// dataType: 'html',
-					contentType: "application/json",
-					dataType: "jsonp",
-					// jsonp: 'jsonp',
-					jsonpCallback: 'appendPosts',
-					crossDomain: true,
-					success: function (data,textStatus,jqXHR) {
-						console.log('success, data:',data, 'jqXHR.statusCode():',jqXHR.statusCode(),' | ',textStatus);
-						// alert('success, ' + jqXHR.statusCode() +' | '+ textStatus);
-						// $('#mainPage').append("\nsuccess<br>");
-						// appendPosts(data);
-					},
-					error: function(jqXHR,textStatus,errorThrown){
-						console.error('error, ',jqXHR.statusCode(),' | ',textStatus,' | ',errorThrown);
-						alert('error, ' + jqXHR.statusCode() +' | '+ textStatus +' | '+ errorThrown);
-					},
-					// complete: function(jqXHR,textStatus){
-						// console.log('complete, ',jqXHR.statusCode(),' | ',textStatus);
-						// alert('complete, ' + jqXHR.statusCode() +' | '+ textStatus);
-					// },
-					// statusCode: {
-						// 0: function(a,b,c) {
-							// console.log(a,b,c);
-							// // alert( "status 0" );
-							// // $('#mainPage').append('status 0<br>');
-						// },
-						// 200: function(a,b,c) {
-							// console.log(a,b,c);
-							// // alert( "status 200" );
-							// // $('#mainPage').append('status 200<br>');
-						// },
-						// 404: function(a,b,c) {
-							// console.log(a,b,c);
-							// alert( "page not found" );
-						// }
-				  // },
-				  timeout: 15000
-			});
-			
-		// });
-		 
 		
-		// alert('here2');
+		_remoteURL('http://tenisuzivo.com/api/get_recent_posts/',/* jsonpCallback:  */'appendPosts');
+			 
+		_handleNavBackButton();
+		
 	}catch(ex){alert(ex+'');}
 }
 
@@ -179,6 +74,8 @@ function appendContent(data){
 }
 
 var aPostTemplate = _.template(jQuery('#a_post_template').text(), null, { variable: "data" });
+var postsByIDs = {};
+var postsByURLs = {};
 function appendPosts(data){
 	console.log('start append posts...');
 	if(data){
@@ -187,17 +84,27 @@ function appendPosts(data){
 			var postsHTML = '';
 			
 			for(var i in data.posts){
+			
 				var the_post = data.posts[i],
-					post = {};
-					
+					post = {comment_count:0};
+			
+				// save posts
+				postsByIDs[the_post.id] = the_post;
+				postsByURLs[the_post.url] = the_post;
+				
+				// prepare data for template for render post
 				if(the_post.id) post.id = the_post.id;
 				if(the_post.url) post.url = the_post.url;
-				if(the_post.title_plain) post.title = the_post.title_plain;
+				if(the_post.title_plain){
+					post.title = the_post.title_plain;
+					post.short_title = the_post.title_plain.substring(0,15) + '...';
+				}
 				// if(the_post.excerpt) post.excerpt = the_post.excerpt.replace(/<\/?[^>]+(>|$)/g,'');
 				// if(the_post.excerpt) post.excerpt = the_post.excerpt.replace(/(<([^>]+)>)/ig,'');//origin
 				// if(the_post.excerpt) post.excerpt = the_post.excerpt.replace(/<[^>]+>/g,'');// still work
-				if(the_post.excerpt) post.excerpt = jQuery(the_post.excerpt).text();// work for <img alt="a>b" src="a_b.gif" />
+				if(the_post.excerpt) post.excerpt = jQuery(the_post.excerpt).text().substring(0,125) + '...';// work for <img alt="a>b" src="a_b.gif" />
 				if(the_post.custom_fields && the_post.custom_fields.Thumbnail && the_post.custom_fields.Thumbnail.length > 0) post.thumb = the_post.custom_fields.Thumbnail[0];
+				if(the_post.comment_count) post.comment_count = the_post.comment_count;
 				
 				postsHTML += aPostTemplate(post);
 				
@@ -236,28 +143,6 @@ function callbackAfterGetContent(){
 	} );
 }
 
-function makeAJAX(config) {
-	// console.log('start load TU...');
-    var request = new XMLHttpRequest();
-    request.open(config.type, config.url, true);
-    request.onreadystatechange = function() {//Call a function when the state changes.
-        if (request.readyState == 4) {
-			console.log(request.status);
-            if (request.status == 200 || request.status == 0) {
-				// var jsonText = request.responseText.replace(/process\(/,'').replace
-				var resText = request.responseText;
-				console.log(resText);
-                // var data = JSON.parse(request.responseText);
-				// if(!data) data = jQuery.parseJSON(request.responseText);
-				
-				// appendContent(resText);
-				config.success(resText);
-            }
-        }
-    }
-    request.send();
-}
-
 /* 
 var slideDeck2URLPath = "http://tenisuzivo.com/wp-content/plugins/slidedeck2-personal";
 var slideDeck2iframeByDefault = false;
@@ -278,104 +163,157 @@ var ressProperties = {"id":"slidedeck_7665_533a5dbbc9e2b","src":"","domain":"ten
 ressProperties.src = "http://tenisuzivo.com/wp-admin/admin-ajax.php?action=slidedeck_preview_iframe&uniqueid=1383231461&slidedeck=7665&width=565&height=350&outer_width=565&outer_height=350&slidedeck_unique_id=slidedeck_7665_533a5dbbc9e2b&post_id=18247&front_page=true&start=".replace(/width=[0-9]+/,'width=' + parseInt(jQuery('#' + slideDeckUniqueId + '-wrapper').width()) ).replace(/height=[0-9]+/,'height=' + parseInt(jQuery('#' + slideDeckUniqueId + '-wrapper').height()) );
 new SlideDeckiFrameResize( ressProperties, slidedeck_7665_533a5dbbc9e2bratio, proportional );
 
- */
- 
-var simpleMobileAjax = function() {
-  // main ajaxRequest, processResponse, getXmlNodeText only
-  this.ajaxRequest = function(url, container) {
-    var xhrRequest = null;
+*/
 
-    if (window.XMLHttpRequest) {
-      xhrRequest = new XMLHttpRequest();
-    }
+var appPages = {};
+var $appPages = jQuery('#app_pages');
 
-    xhrRequest.open('GET', url);
+function _displayAppPage(url){
+	// alert(url);
+	// alert(url===homeURL);
+	$appPages.find('.app_page.active').removeClass('active');
+	if(url === homeURL){
+		$appPages.find('.app_page.home').addClass('active');
+	}else{
+		postsByURLs[url]['jel'].addClass('active');
+	}
+}
 
-    if (window.XMLHttpRequest) {
-      xhrRequest.source = this;
-      xhrRequest.onreadystatechange = function() {
-        xhrRequest.source.processResponse(xhrRequest, url, container); };
-    }
+// handle back button
+var homeURL = 'http://tenisuzivo.com/';
+var currentURL = homeURL;
+var _history = [homeURL];
+var $navBackButton = jQuery('#nav_back_button');
+function _handleNavBackButton(){
+	// if(document.referrer != ''){
+	// if(_history.length>1){
+		$navBackButton
+			// .removeClass('hidden')
+			.on('click',function(e){
+				// alert('asdf');
+				e.preventDefault();
+				
+				_history.pop();// current page
+				
+				var backURL = homeURL;
+				if(_history.length>1) backURL = _history.pop();
+				
+				openURL(backURL);
+				if(_history.length==1) $navBackButton.addClass('hidden');
+				
+			});
+	// }
+}
 
-    if (xhrRequest) {
-      xhrRequest.send(null);
-    }
-  }
+var top_widgets_wrp = jQuery('#top_widgets_wrp');
+function openURL(url, saveHistory){
+	// console.log(url);
+	// console.log(postsByURLs[url]);
+	
+	if(url === homeURL){
+		top_widgets_wrp.show();
+		// return;
+	}else{
+		top_widgets_wrp.hide();
+	}
+	
+	if (typeof saveHistory === 'undefined') saveHistory = true;
+	
+	// check if page is existing
+	if(typeof appPages[url] === 'undefined'){ // not exist
+		if(url !== homeURL){
+			// create new app_page
+			if (typeof postsByURLs[url] === 'undefined'){
+				// request to get post content
+				// _remotePostById(postsByURLs[url]['id']);
+			}else{
+				var the_post = postsByURLs[url];
+				var pageContent = the_post.content;
+				// append & show page
+				postsByURLs[url]['jel'] = jQuery('<div>',{class:'app_page '+the_post.slug})
+					.append(pageContent)
+					.appendTo($appPages);
+			}
+		}
+	}
+	// display page
+	_displayAppPage(url);
+	
+	if ( saveHistory && /* currentURL */_history[_history.length-1] !== url ) {
+		_history.push(url);
+		$navBackButton.removeClass('hidden');
+	}
+	
+	currentURL = url;
+}
 
-  this.processResponse = function(xhrResp, url, container) {
-    if (!xhrResp || xhrResp.readyState < 4) {
-      return;
-    }
-    if (xhrResp.readyState == 4) {
-      if (xhrResp.status == 200 || xhrResp.status == 0) {
-	  
-		console.log(xhrResp);
-		alert('success, '+xhrResp.status);
-	  
-        if (url && container) {
-          /* url = url.toLowerCase();
+function _remoteURL(url,jsonpCallback){
+	
+	var postData = {
+				xtoken: xtoken
+				// get_live_info:true
+				// ,max_num_of_matches:99//maxMatches
+				// ,tz_offset:tz_offset
+				// ,last_server_index:last_server_index
+				// ,fdays: forceFDays
+			};
+	$.ajax({
+			// type: 'POST',
+			type: 'GET',
+			// url: "http://tenisuzivo.com/wp-content/plugins/live-score-widget/lsw_scraper.php",
+			// url: 'http://tenisuzivo.com',
+			// url: 'http://tenisuzivo/wp-content/plugins/live-score-widget/crontab-lsw_scraper_today.php?show_log=1&get_raw=107',
+			// url: 'http://tenisuzivo/wp-content/plugins/live-score-widget/lsw_scraper.php?get_live_info=1',
+			// url: 'http://tenisuzivo/wp-content/plugins/live-score-widget/lsw_scraper.php',
+			// url: 'http://tenisuzivo.com/?jsonp=1&callback=process&xtoken='+xtoken,
+			// url: 'http://tenisuzivo/?jsonp=1&callback=process&xtoken='+xtoken,
+			// url: 'http://tenisuzivo.com/wp-content/plugins/live-score-widget/lsw_scraper.php?get_live_info=1&callback=process',
+			// url: 'http://www.tjorndesign.se/mrtest/?jsonp=1&callback=process',
+			url: url,
+			// data: postData,
+			// dataType: 'json',
+			// dataType: 'html',
+			contentType: "application/json",
+			dataType: "jsonp",
+			// jsonp: 'jsonp',
+			jsonpCallback: jsonpCallback,
+			crossDomain: true,
+			success: function (data,textStatus,jqXHR) {
+				console.log('success, data:',data, 'jqXHR.statusCode():',jqXHR.statusCode(),' | ',textStatus);
+				// alert('success, ' + jqXHR.statusCode() +' | '+ textStatus);
+				// $('#mainPage').append("\nsuccess<br>");
+				// appendPosts(data);
+			},
+			error: function(jqXHR,textStatus,errorThrown){
+				console.error('error, ',jqXHR.statusCode(),' | ',textStatus,' | ',errorThrown);
+				alert('error, ' + jqXHR.statusCode() +' | '+ textStatus +' | '+ errorThrown);
+			},
+			// complete: function(jqXHR,textStatus){
+				// console.log('complete, ',jqXHR.statusCode(),' | ',textStatus);
+				// alert('complete, ' + jqXHR.statusCode() +' | '+ textStatus);
+			// },
+			// statusCode: {
+				// 0: function(a,b,c) {
+					// console.log(a,b,c);
+					// // alert( "status 0" );
+					// // $('#mainPage').append('status 0<br>');
+				// },
+				// 200: function(a,b,c) {
+					// console.log(a,b,c);
+					// // alert( "status 200" );
+					// // $('#mainPage').append('status 200<br>');
+				// },
+				// 404: function(a,b,c) {
+					// console.log(a,b,c);
+					// alert( "page not found" );
+				// }
+		  // },
+		  timeout: 15000
+	});
+	
 
-          try {
-            if (url.indexOf('.xml') == -1) {
-              // display results as-is
-              document.getElementById(container).innerHTML =
-                xhrResp.responseText;
-            }
-            else {
-              var xmlDoc = xhrResp.responseXML;
-              var allnodes = xmlDoc.getElementsByTagName('*').item(0);
+}
 
-              // for xml, do simple node text display
-              var nodetext = this.getXmlNodeText(allnodes);
-
-              if (!window.XMLHttpRequest) {
-                // note: no \r\n between some browser node values, only a space.
-                // if your xml is simple enough, this replace might work:
-                // (if not, ajaMobileAjax has a complete parent/child/cdata
-                //  XML node parsing routine)
-                nodetext = nodetext.replace(/\s/g, '<br\>');
-              }
-              else {
-                // Mozilla etc support this
-                nodetext = nodetext.replace(/\r|\n|\r\n/g, '<br\>');
-              }
-
-              document.getElementById(container).innerHTML = nodetext;
-
-              // clean up after:
-              xmlDoc = null;
-              allnodes = null;
-              nodetext = null;
-            }
-          }
-          catch (e) {
-            alert('Mobile Ajax.js error with ' + url + '\r\n' +
-                  'check url and container ' + container);
-          } */
-        }
-        else {
-          alert('Mobile Ajax.js error: required parameters are missing');
-        }
-      }
-      else {
-        alert('Mobile Ajax.js error with ' + url);
-      }
-    }
-  }
-
-  this.getXmlNodeText = function(xmlnode) {
-    try {
-      // Mozilla, etc.
-      if (xmlnode.textContent) {
-        return xmlnode.textContent;
-      }
-      else {
-        return xmlnode.text;
-      }
-    }
-    catch (e) {
-      alert(e.description);
-      return null;
-    }
-  }
+function _remotePostById(post_id){
+	_remoteURL('http://tenisuzivo.com/api/get_post/'+post_id, 'appendPosts');
 }

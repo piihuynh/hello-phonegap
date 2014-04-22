@@ -357,7 +357,7 @@ em {font-style: italic;}
 	/*new-pii*/
 	#header::before {
 		content: " ";
-		background: url(/wp-content/themes/tenisuzivo/images/tenisuzivo_sprite.png) -10px -132px no-repeat;
+		background: url(../img/tenisuzivo_sprite.png) -10px -132px no-repeat;
 		width: 10px;
 		height: 100%;
 		position: absolute;
@@ -425,7 +425,7 @@ em {font-style: italic;}
 .sprite-1.sprite-1-count_comments{ background-position: 0 -589px; width: 13px; height: 28px; } 
 .sprite-1.sprite-1-credits{ background-position: -63px -589px; width: 939px; height: 37px; } 
 /*.sprite-1.sprite-1-facebook{ background-position: -1052px -589px; width: 32px; height: 32px; } pii*/
-/*new-pii*/.sprite-1.sprite-1-facebook{ background: url('/wp-content/themes/tenisuzivo/images/tenisuzivo_sprite.png') no-repeat; background-position: -70px -132px; width: 30px; height: 30px;margin: 3px 1px 0 1px;}
+/*new-pii*/.sprite-1.sprite-1-facebook{ background: url('../img/tenisuzivo_sprite.png') no-repeat; background-position: -70px -132px; width: 30px; height: 30px;margin: 3px 1px 0 1px;}
 .sprite-1.sprite-1-footer_bg{ background-position: -1134px -589px; width: 939px; height: 1px; } 
 /*.sprite-gravatar_borders { background-position: 0 -842px !important; width: 65px; height: 65px; /* top:13px; left:0; } */ 
 .sprite-1.sprite-1-header_bg{ background-position: -115px -842px; width: 1px; height: 93px; } 
@@ -446,7 +446,7 @@ em {font-style: italic;}
 .sprite-1.sprite-1-tabs_content{ background-position: 0 -1095px; width: 289px; height: 1px; } 
 .sprite-1.sprite-1-tabs_content_tops{ background-position: -339px -1095px; width: 289px; height: 10px; } 
 /*.sprite-1.sprite-1-twitter{ background-position: -678px -1095px; width: 32px; height: 32px; } pii*/
-/*new-pii*/.sprite-1.sprite-1-twitter{ background: url('/wp-content/themes/tenisuzivo/images/tenisuzivo_sprite.png') no-repeat;background-position: -30px -132px; width: 30px; height: 30px;margin: 3px 1px 0 1px;}
+/*new-pii*/.sprite-1.sprite-1-twitter{ background: url('../img/tenisuzivo_sprite.png') no-repeat;background-position: -30px -132px; width: 30px; height: 30px;margin: 3px 1px 0 1px;}
 
 /*header*/
 #header {
@@ -461,7 +461,7 @@ em {font-style: italic;}
 }
 /*new-pii*/
 #heading {
-	background: url('/wp-content/themes/tenisuzivo/images/tenisuzivo_sprite.png') -10px -132px no-repeat;
+	background: url('../img/tenisuzivo_sprite.png') -10px -132px no-repeat;
 }
 
 #heading,#heading #heading_right {
@@ -1183,7 +1183,7 @@ font-weight: 700;
 font-size: 1.4em;
 text-shadow: 1px 1px 2px #666;
 /*new*/
-background: url('/wp-content/themes/tenisuzivo/images/tenisuzivo_sprite.png') no-repeat;
+background: url('../img/tenisuzivo_sprite.png') no-repeat;
 background-position: -10px -0px;
 line-height: 28px;
 padding-left: 185px;
@@ -1203,7 +1203,7 @@ text-shadow: 1px 1px 2px #666;
 float:left;
 margin-right:17px;
 /*new*/
-background: url('/wp-content/themes/tenisuzivo/images/tenisuzivo_sprite.png') no-repeat;
+background: url('../img/tenisuzivo_sprite.png') no-repeat;
 background-position: -10px -0px;
 }
 

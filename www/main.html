@@ -11,7 +11,7 @@
 		
 		<!-- <link rel="stylesheet"  href="css/themes/default/jquery.mobile-1.4.0.css"> -->
     
-		<!-- <link rel="stylesheet" href="css/font-awesome.css"> -->
+		<link rel="stylesheet" href="css/font-awesome.css">
 		<!-- <link rel="stylesheet" type="text/css" href="http://netdna.bootstrapcdn.com/font-awesome/3.2.1/css/font-awesome.css"> -->
 		<link rel="stylesheet" type="text/css" href="css/flexslider.css">
 		<link rel="stylesheet" type="text/css" href="css/lsw/sprites.css">
@@ -22,6 +22,31 @@
 		
 
 		<!-- <link rel="stylesheet"  href="css/app.css"> -->
+		<script type="text/javascript">
+			(function(document/*,navigator,standalone*/) {
+				// prevents links from apps from oppening in mobile safari
+				// if ((standalone in navigator) && navigator[standalone])
+				//{
+					var curnode, location=document.location, stop=/^(a|html)$/i;
+					document.addEventListener('click', function(e) {
+						curnode=e.target;
+						while (!(stop).test(curnode.nodeName)) {
+							curnode=curnode.parentNode;
+						}
+						
+						// if('href' in curnode && ( curnode.href.indexOf('http') || ~curnode.href.indexOf(location.host) ) ) {
+						if('href' in curnode
+						&& !/mobile-header/.test(curnode.className)
+						//&& !/navigateTo/.test(curnode.className)
+						) {
+							e.preventDefault();
+							//location.href = curnode.href;
+							openURL(curnode.href);
+						}
+					},false);
+				//}
+			})(document/*,window.navigator,'standalone'*/);
+		</script>
 
 		<script type="text/javascript" src="js/jquery.js"></script>
 		
@@ -30,9 +55,8 @@
 		<!-- <script type="text/javascript" src="js/jquery.mobile-1.4.0.js"></script> -->
 		<!-- <script type="text/javascript" src="js/jquery.jsonp-2.4.0.min.js"></script> -->
 		
-		<!-- <script type="text/javascript">
+		<script type="text/javascript">
 		
-			/*pii*/
 			var externalJSDeffered = externalJSDeffered || [],
 				deferCallbacks = deferCallbacks || [],
 				head=document.getElementsByTagName('head')[0];
@@ -87,7 +111,8 @@
 			else window.onload = downloadJSAtOnload;
 			
 			
-		</script> -->
+		</script>
+		
 		<!-- <script src="js/jquery-1.10.2.min.js"></script> -->
 		<!-- <script type="text/javascript" src='js/jquery/jquery-migrate.min.js?ver=1.2.1'></script> -->
 		<!-- <script type="text/javascript" src='js/jquery-ui-1.7.2.custom.min.js?ver=3.8.1'></script> -->
@@ -121,10 +146,14 @@
 						<div id="heading_right">
 							<div id="heading_bg">
 								<div id="mobile-nav-items">
+									<a id="nav_back_button" class="mobile-header hidden" href="#"><i class="icon-chevron-left"></i></a>
 									<a id="mobile-navigation" class="mobile-header" href="#"><i class="icon-reorder"></i></a>
-									<h1><a href="http://tenisuzivo.com" title="Tenis Uživo"><span class="hidden">
-												Tenis Uživo	                                    </span><img src="http://tenisuzivo.com/wp-content/themes/tenisuzivo/images/tenisuzivo-grb1.png" alt="Tenis Uživo - Home"></a></h1>
-									<h2><cufon class="cufon cufon-canvas" alt="Tenis " style="width: 32px; height: 14px;"><canvas width="44" height="16" style="width: 44px; height: 16px; top: -2px; left: -1px;"></canvas><cufontext>Tenis </cufontext></cufon><cufon class="cufon cufon-canvas" alt="Live " style="width: 26px; height: 14px;"><canvas width="38" height="16" style="width: 38px; height: 16px; top: -2px; left: -1px;"></canvas><cufontext>Live </cufontext></cufon><cufon class="cufon cufon-canvas" alt="Prenos" style="width: 39px; height: 14px;"><canvas width="49" height="16" style="width: 49px; height: 16px; top: -2px; left: -1px;"></canvas><cufontext>Prenos</cufontext></cufon></h2>
+									<h1>
+										<a href="http://tenisuzivo.com" title="Tenis Uživo">
+											<span class="hidden">Tenis Uživo</span>
+											<img src="http://tenisuzivo.com/wp-content/themes/tenisuzivo/images/tenisuzivo-grb1.png" alt="Tenis Uživo - Home">
+										</a>
+									</h1>
 									<a id="mobile-search" class="mobile-header" href="#"><i class="icon-search"></i></a>
 								</div>
 							</div>
@@ -136,7 +165,7 @@
 						 <ul id="nav" class="sf-menu mobile-menu">
 							<li id="menu-item-18602" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-18602"><a title="Live Prenos" href="http://tenisuzivo.com/kategorija/tenis-vesti/live-prenos/"><span>Prenos</span></a></li>
 							<li id="menu-item-18603" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-18603"><a href="http://tenisuzivo.com/kategorija/tenis-vesti/"><span>Vesti</span></a></li>
-							<li id="menu-item-18604" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-18604"><a href="/livescore"><span>LiveScore</span></a></li>
+							<li id="menu-item-18604" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-18604"><a href="http://tenisuzivo.com/livescore"><span>LiveScore</span></a></li>
 						</ul>
 						<!-- End top MOBILE menu -->
 						<!-- <span id="finish-nav-border"></span> -->
@@ -174,95 +203,102 @@
 				<div id="content_container">
 					<div id="content_container_bg">
 						<div id="content">
-
+							<div id="top_widgets_wrp">
 						
-						<!-- Slider -->
+							<!-- Slider -->
 
-							<div id="slidedeck_7665_5347b3f1c4222-wrapper" class="sd2-ress-wrapper" style="height: 200px;">
-									<!-- <dl class="sd2-alternate-hidden-content" style="height:0;overflow:hidden;visibility:hidden;">
-										<dt>WTA Bogota: Jelena Janković u četvrtfinalu!</dt>
-										<dd style="" class="has-image has-excerpt has-title sd2-image-scaling-cover slide-type-image slide-source-posts" data-thumbnail-src="http://tenisuzivo.com/wp-content/slike/Jelena-Jankovic1-e1361647406449.jpeg">
-											<div class="sd-node-title-box">
-												<div class="slide-title accent-color">
-													<a class="accent-color" href="http://tenisuzivo.com/wta-bogota-jelena-jankovic-u-cetvrtfinalu/" target="_top">WTA Bogota: Jelena Janković u četvrtfinalu…</a></div>
+								<div id="slidedeck_7665_5347b3f1c4222-wrapper" class="sd2-ress-wrapper" style="height: 200px;">
+										<!-- <dl class="sd2-alternate-hidden-content" style="height:0;overflow:hidden;visibility:hidden;">
+											<dt>WTA Bogota: Jelena Janković u četvrtfinalu!</dt>
+											<dd style="" class="has-image has-excerpt has-title sd2-image-scaling-cover slide-type-image slide-source-posts" data-thumbnail-src="http://tenisuzivo.com/wp-content/slike/Jelena-Jankovic1-e1361647406449.jpeg">
+												<div class="sd-node-title-box">
+													<div class="slide-title accent-color">
+														<a class="accent-color" href="http://tenisuzivo.com/wta-bogota-jelena-jankovic-u-cetvrtfinalu/" target="_top">WTA Bogota: Jelena Janković u četvrtfinalu…</a></div>
+														<div class="slide-meta">
+															<span class="slide-author">N. Mihajlović</span>
+															<span class="slide-date"></span>
+														</div>
+														<p class="slide-text">Srpska teniserka Jelena Janković plasirala se u četvrtfinale WTA turnira u Bogoti. Srpkinja je u osm… 
+															<a href="http://tenisuzivo.com/wta-bogota-jelena-jankovic-u-cetvrtfinalu/" class="readmore accent-color" target="_top">Read More</a>
+														</p>
+													</div>
+													<div class="sd2-slide-background" data-sd2-slide-image="http://tenisuzivo.com/wp-content/slike/Jelena-Jankovic1-e1361647406449.jpeg">&nbsp;</div>
+													<a href="http://tenisuzivo.com/wta-bogota-jelena-jankovic-u-cetvrtfinalu/" class="full-slide-link-hit-area" target="_top"></a>
+											</dd>
+											<dt>Janković - Šapatava live prenos (oko 19:30h) - Gledajte direktan prenos</dt>
+											<dd style="" class="has-image has-excerpt has-title sd2-image-scaling-cover slide-type-image slide-source-posts" data-thumbnail-src="http://tenisuzivo.com/wp-content/slike/jelena-jankovic-live-prenos-tenis-uzivo-150x150.jpg">
+												<div class="sd-node-title-box">
+													<div class="slide-title accent-color">
+														<a class="accent-color" href="http://tenisuzivo.com/jankovic-sapatava-live-prenos-oko-1930h-gledajte-direktan-prenos/" target="_top">            Janković – Šapatava live prenos (oko 19:30…        </a>
+													</div>
 													<div class="slide-meta">
-														<span class="slide-author">N. Mihajlović</span>
+														<span class="slide-author">
+																T. Popov                    
+														</span>
 														<span class="slide-date"></span>
 													</div>
-													<p class="slide-text">Srpska teniserka Jelena Janković plasirala se u četvrtfinale WTA turnira u Bogoti. Srpkinja je u osm… 
-														<a href="http://tenisuzivo.com/wta-bogota-jelena-jankovic-u-cetvrtfinalu/" class="readmore accent-color" target="_top">Read More</a>
+													<p class="slide-text">U osmini finala na WTA turniru u Bogoti srpska teniserka Jelena Janković, koja brani titulu, sastaće… 
+														<a href="http://tenisuzivo.com/jankovic-sapatava-live-prenos-oko-1930h-gledajte-direktan-prenos/" class="readmore accent-color" target="_top">Read More</a>
 													</p>
 												</div>
-												<div class="sd2-slide-background" data-sd2-slide-image="http://tenisuzivo.com/wp-content/slike/Jelena-Jankovic1-e1361647406449.jpeg">&nbsp;</div>
-												<a href="http://tenisuzivo.com/wta-bogota-jelena-jankovic-u-cetvrtfinalu/" class="full-slide-link-hit-area" target="_top"></a>
-										</dd>
-										<dt>Janković - Šapatava live prenos (oko 19:30h) - Gledajte direktan prenos</dt>
-										<dd style="" class="has-image has-excerpt has-title sd2-image-scaling-cover slide-type-image slide-source-posts" data-thumbnail-src="http://tenisuzivo.com/wp-content/slike/jelena-jankovic-live-prenos-tenis-uzivo-150x150.jpg">
-											<div class="sd-node-title-box">
-												<div class="slide-title accent-color">
-													<a class="accent-color" href="http://tenisuzivo.com/jankovic-sapatava-live-prenos-oko-1930h-gledajte-direktan-prenos/" target="_top">            Janković – Šapatava live prenos (oko 19:30…        </a>
-												</div>
-												<div class="slide-meta">
+
+										<div class="sd2-slide-background" data-sd2-slide-image="http://tenisuzivo.com/wp-content/slike/jelena-jankovic-live-prenos-tenis-uzivo.jpg">&nbsp;</div>
+									<a href="http://tenisuzivo.com/jankovic-sapatava-live-prenos-oko-1930h-gledajte-direktan-prenos/" class="full-slide-link-hit-area" target="_top"></a></dd><dt>Federer posle dve godine igra u Monte Karlu</dt><dd style="" class="has-image has-excerpt has-title sd2-image-scaling-cover slide-type-image slide-source-posts" data-thumbnail-src="http://tenisuzivo.com/wp-content/slike/Rodzer-Federer2-e1391023866720.jpg"><div class="sd-node-title-box">
+										
+											
+										<div class="slide-title accent-color">
+											<a class="accent-color" href="http://tenisuzivo.com/federer-posle-dve-godine-igra-u-monte-karlu/" target="_top">            Federer posle dve godine igra u Monte Karl…        </a>	</div>
+										
+										<div class="slide-meta">
 													<span class="slide-author">
-															T. Popov                    
-													</span>
-													<span class="slide-date"></span>
-												</div>
-												<p class="slide-text">U osmini finala na WTA turniru u Bogoti srpska teniserka Jelena Janković, koja brani titulu, sastaće… 
-													<a href="http://tenisuzivo.com/jankovic-sapatava-live-prenos-oko-1930h-gledajte-direktan-prenos/" class="readmore accent-color" target="_top">Read More</a>
-												</p>
-											</div>
-
-									<div class="sd2-slide-background" data-sd2-slide-image="http://tenisuzivo.com/wp-content/slike/jelena-jankovic-live-prenos-tenis-uzivo.jpg">&nbsp;</div>
-								<a href="http://tenisuzivo.com/jankovic-sapatava-live-prenos-oko-1930h-gledajte-direktan-prenos/" class="full-slide-link-hit-area" target="_top"></a></dd><dt>Federer posle dve godine igra u Monte Karlu</dt><dd style="" class="has-image has-excerpt has-title sd2-image-scaling-cover slide-type-image slide-source-posts" data-thumbnail-src="http://tenisuzivo.com/wp-content/slike/Rodzer-Federer2-e1391023866720.jpg"><div class="sd-node-title-box">
-									
+																T. Popov                    </span>
+											<span class="slide-date"></span>
+										</div>
 										
-									<div class="slide-title accent-color">
-										<a class="accent-color" href="http://tenisuzivo.com/federer-posle-dve-godine-igra-u-monte-karlu/" target="_top">            Federer posle dve godine igra u Monte Karl…        </a>	</div>
-									
-									<div class="slide-meta">
-												<span class="slide-author">
-															T. Popov                    </span>
-										<span class="slide-date"></span>
+												<p class="slide-text">Jedan od najboljih tenisera svih vremena, Rodžer Federer, igraće na turniru iz Masters serije u Mont… 
+												<a href="http://tenisuzivo.com/federer-posle-dve-godine-igra-u-monte-karlu/" class="readmore accent-color" target="_top">Read More</a>
+											</p>
+											
+											
 									</div>
-									
-											<p class="slide-text">Jedan od najboljih tenisera svih vremena, Rodžer Federer, igraće na turniru iz Masters serije u Mont… 
-											<a href="http://tenisuzivo.com/federer-posle-dve-godine-igra-u-monte-karlu/" class="readmore accent-color" target="_top">Read More</a>
-										</p>
-										
-										
-								</div>
 
-									<div class="sd2-slide-background" data-sd2-slide-image="http://tenisuzivo.com/wp-content/slike/Rodzer-Federer2-e1391023866720.jpg">&nbsp;</div>
-								<a href="http://tenisuzivo.com/federer-posle-dve-godine-igra-u-monte-karlu/" class="full-slide-link-hit-area" target="_top"></a></dd><dt>Nadal: Biće teško na Rolan Garosu</dt><dd style="" class="has-image has-excerpt has-title sd2-image-scaling-cover slide-type-image slide-source-posts" data-thumbnail-src="http://tenisuzivo.com/wp-content/slike/Rafael-Nadal-e1368226478455.jpg"><div class="sd-node-title-box">
-									
+										<div class="sd2-slide-background" data-sd2-slide-image="http://tenisuzivo.com/wp-content/slike/Rodzer-Federer2-e1391023866720.jpg">&nbsp;</div>
+									<a href="http://tenisuzivo.com/federer-posle-dve-godine-igra-u-monte-karlu/" class="full-slide-link-hit-area" target="_top"></a></dd><dt>Nadal: Biće teško na Rolan Garosu</dt><dd style="" class="has-image has-excerpt has-title sd2-image-scaling-cover slide-type-image slide-source-posts" data-thumbnail-src="http://tenisuzivo.com/wp-content/slike/Rafael-Nadal-e1368226478455.jpg"><div class="sd-node-title-box">
 										
-									<div class="slide-title accent-color">
-										<a class="accent-color" href="http://tenisuzivo.com/nadal-bice-tesko-na-rolan-garosu/" target="_top">            Nadal: Biće teško na Rolan Garosu        </a>	</div>
-									
-									<div class="slide-meta">
-												<span class="slide-author">
-															T. Popov                    </span>
-										<span class="slide-date"></span>
+											
+										<div class="slide-title accent-color">
+											<a class="accent-color" href="http://tenisuzivo.com/nadal-bice-tesko-na-rolan-garosu/" target="_top">            Nadal: Biće teško na Rolan Garosu        </a>	</div>
+										
+										<div class="slide-meta">
+													<span class="slide-author">
+																T. Popov                    </span>
+											<span class="slide-date"></span>
+										</div>
+										
+												<p class="slide-text">Turnirom u Monte Karlu u nedelju za Rafaela Nadala počinje sezona na šljaci, a najbolji teniser svet… 
+												<a href="http://tenisuzivo.com/nadal-bice-tesko-na-rolan-garosu/" class="readmore accent-color" target="_top">Read More</a>
+											</p>
+											
+											
 									</div>
+
+										<div class="sd2-slide-background" data-sd2-slide-image="http://tenisuzivo.com/wp-content/slike/Rafael-Nadal-e1368226478455.jpg">&nbsp;</div>
+									<a href="http://tenisuzivo.com/nadal-bice-tesko-na-rolan-garosu/" class="full-slide-link-hit-area" target="_top"></a></dd></dl>
+
+									 -->
+									 
+									<!-- <iframe src="http://tenisuzivo.com/wp-admin/admin-ajax.php?action=slidedeck_preview_iframe&amp;uniqueid=1384708590&amp;slidedeck=7665&amp;width=635&amp;height=380&amp;outer_width=635&amp;outer_height=380&amp;slidedeck_unique_id=slidedeck_7665_5347b3f1c4222&amp;post_id=21909&amp;front_page=true&amp;start=2" width="0" scrolling="no" frameborder="0" id="slidedeck_7665_5347b3f1c4222" style="height: 376px; width: 100%;"></iframe> -->
 									
-											<p class="slide-text">Turnirom u Monte Karlu u nedelju za Rafaela Nadala počinje sezona na šljaci, a najbolji teniser svet… 
-											<a href="http://tenisuzivo.com/nadal-bice-tesko-na-rolan-garosu/" class="readmore accent-color" target="_top">Read More</a>
-										</p>
-										
-										
 								</div>
-
-									<div class="sd2-slide-background" data-sd2-slide-image="http://tenisuzivo.com/wp-content/slike/Rafael-Nadal-e1368226478455.jpg">&nbsp;</div>
-								<a href="http://tenisuzivo.com/nadal-bice-tesko-na-rolan-garosu/" class="full-slide-link-hit-area" target="_top"></a></dd></dl>
-
-								 -->
-								<!-- <iframe src="http://tenisuzivo.com/wp-admin/admin-ajax.php?action=slidedeck_preview_iframe&amp;uniqueid=1384708590&amp;slidedeck=7665&amp;width=635&amp;height=380&amp;outer_width=635&amp;outer_height=380&amp;slidedeck_unique_id=slidedeck_7665_5347b3f1c4222&amp;post_id=21909&amp;front_page=true&amp;start=2" width="0" scrolling="no" frameborder="0" id="slidedeck_7665_5347b3f1c4222" style="height: 376px; width: 100%;"></iframe>
-								 -->
-							</div>
-							<!--# Slider -->
-							<div id="posts" class="blue">
-								<div class="page-navigation" style="display: none;"><p><a href="http://tenisuzivo.com/page/2/">Next Page »</a></p></div>
+								<!--# Slider -->
+							</div><!--# top_widgets_wrp -->
+							<div id="app_pages">
+								<div class="app_page home active">
+									<div id="posts" class="blue">
+										<div class="page-navigation" style="display: none;"><p><a href="http://tenisuzivo.com/page/2/">Next Page »</a></p></div>
+									</div>
+								</div>
+								<!-- other app pages go here -->
 							</div>
 						</div>
 						
@@ -305,7 +341,7 @@
 												</div><!--inner_matchs_wrp-->
 											</div><!--matchs_wrp-->
 												
-											<a href="/livescore#result" class="match_row bottom_link">
+											<a href="http://tenisuzivo.com/livescore#result" class="match_row bottom_link">
 												<div class="inner_bottom_link">
 													Svi rezultati
 												</div>
@@ -320,7 +356,7 @@
 												<div class="inner_matchs_wrp">
 												</div><!--inner_matchs_wrp-->
 											</div><!--matchs_wrp-->
-											<a href="/livescore#schedule" class="match_row bottom_link">
+											<a href="http://tenisuzivo.com/livescore#schedule" class="match_row bottom_link">
 												<div class="inner_bottom_link">
 													Svi naredni mečevi
 												</div>
@@ -355,10 +391,18 @@
 					Copyright © 2011-2014 Tenis Uživo				
 					<div class="menu-new-footer-menu-container">
 						<ul id="menu-new-footer-menu" class="menu">
-							<li id="menu-item-18462" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-18462"><a href="/teniski-kalendar/">Kalendar</a></li>
-							<li id="menu-item-18463" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-18463"><a href="/partneri">Partneri</a></li>
-							<li id="menu-item-19441" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-19441"><a href="http://tenisuzivo.com/pravila-koriscenja/">Pravila korišćenja</a></li>
-							<li id="menu-item-18465" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-18465"><a href="/pisite-nam/">Kontakt</a></li>
+							<li id="menu-item-18462" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-18462">
+								<a href="http://tenisuzivo.com/teniski-kalendar/">Kalendar</a>
+							</li>
+							<li id="menu-item-18463" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-18463">
+								<a href="http://tenisuzivo.com/partneri">Partneri</a>
+							</li>
+							<li id="menu-item-19441" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-19441">
+								<a href="http://tenisuzivo.com/pravila-koriscenja/">Pravila korišćenja</a>
+							</li>
+							<li id="menu-item-18465" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-18465">
+								<a href="http://tenisuzivo.com/pisite-nam/">Kontakt</a>
+							</li>
 						</ul>
 					</div>
 				</div>
@@ -399,24 +443,23 @@
 				<div class="post-<%= data.id %> post type-post status-publish format-standard hentry category-masters tag-slider left" id="post-<%= data.id %>">
 					<div class="categorie">
 						<h3><%= data.title %></h3>
-						<!--div class="icons"><a class="hide"><span class="hidden">hide</span></a></div-->
 					</div>
 					<div class="min">
 						<a href="<%= data.url %>">
 							<div class="text">
 								<div class="thumb_cont">
-									<img class="mobile-thumb" src="http://tenisuzivo.com/wp-content/themes/tenisuzivo/timthumb.php?src=<%= data.thumb %>&amp;h=103&amp;w=240&amp;q=100&amp;zc=1" alt="Federer posle dve godine igra u Monte Karlu">
-									<!-- <img class="desktop-thumb" src="http://tenisuzivo.com/wp-content/themes/tenisuzivo/timthumb.php?src=http://tenisuzivo.com/wp-content/slike/Rodzer-Federer2-e1391023866720.jpg&amp;h=103&amp;w=240&amp;q=100&amp;zc=1" alt="Federer posle dve godine igra u Monte Karlu" width="240" height="88"> -->
-									<!-- <span class="hidden">&nbsp;</span><a class="comments_balloon">0</a> -->
+									<img class="mobile-thumb" src="http://tenisuzivo.com/wp-content/themes/tenisuzivo/timthumb.php?src=<%= data.thumb %>&amp;h=103&amp;w=240&amp;q=100&amp;zc=1" alt="<%= data.title %>">
+									<img class="desktop-thumb" src="http://tenisuzivo.com/wp-content/themes/tenisuzivo/timthumb.php?src=<%= data.thumb %>&amp;h=103&amp;w=240&amp;q=100&amp;zc=1" alt="<%= data.title %>" width="240" height="88">
+									<a class="comments_balloon"><%= data.comment_count %></a>
 								</div>
 								<h2>
-									<a href="<%= data.url %>" rel="bookmark" title="<%= data.title %>"><%= data.title %></a>
+									<a href="<%= data.url %>" rel="bookmark" title="<%= data.title %>"><%= data.short_title %></a>
 								</h2>
 								<p><%= data.excerpt %></p>
 							</div>
 						</a>
 					</div>
-					<!-- <div class="more"><a href="http://tenisuzivo.com/federer-posle-dve-godine-igra-u-monte-karlu/">Opširnije</a></div> -->
+					<div class="more"><a href="<%= data.url %>">Opširnije</a></div>
 				</div>
 			</a>
 		</script>
@@ -547,67 +590,70 @@
 		</script>
 
 		<script type="text/template" id="template_schedule_row">
-		<a href="<% if (typeof data.post_permalink != 'undefined') print(data.post_permalink);else print('javascript:;'); %>" class="match_row <%= data.id %>">
-			<div class="col c_result_info c_cancel <% if (data.is_cancelled) print('cancelled'); %>">
-				<div class="next_info">
-					<div class="inner_info">
-						<% if (data.player_retired){ %>
-						<div class="text">Predaja</div>
-						<% } %>
-						<div class="time <% if (data.is_time_changed) print(' time_changing'); %> <% if (typeof data.old_game_time != 'undefined') print(' time_latter');if (typeof data.time_earlier != 'undefined') print(' time_earlier'); %>">
-							<%= data.game_time %>
+			<a href="<% if (typeof data.post_permalink != 'undefined') print(data.post_permalink);else print('javascript:;'); %>" class="match_row <%= data.id %>">
+				<div class="col c_result_info c_cancel <% if (data.is_cancelled && data.is_cancelled!='is_cancelled') print('cancelled'); %>">
+					<div class="next_info">
+						<div class="inner_info">
+							<% if (data.player_retired){ %>
+							<div class="text">Predaja</div>
+							<% } %>
+							<% if (data.is_cancelled && data.is_cancelled=='is_cancelled'){ %>
+							<div class="text">Otkaz.</div>
+							<% } %>
+							<div class="time <% if (data.is_time_changed) print(' time_changing'); %> <% if (typeof data.old_game_time != 'undefined') print(' time_latter');if (typeof data.time_earlier != 'undefined') print(' time_earlier'); %> <% if (data.is_cancelled && data.is_cancelled=='is_cancelled') print('text opaque'); %>">
+								<%= data.game_time %>
+							</div>
+							<% if (!data.is_cancelled && typeof data.old_game_time != 'undefined' && typeof data.player_retired == 'undefined') { %>
+							<div class="change_time_info opaque">
+								Novo<br />vreme
+							</div>
+							<% } %>
 						</div>
-						<% if (typeof data.old_game_time != 'undefined' && typeof data.player_retired == 'undefined') { %>
-						<div class="change_time_info opaque">
-							Novo<br />vreme
+					</div>
+					<% if (data.is_cancelled) { %>
+					<div class="cancel_info">
+						<div class="inner_info">
+							<div class="text">
+								<%
+									if(data.is_cancelled=='is_delayed') print('Zakasn.');
+									else if(data.is_cancelled=='is_interrupted') print('Prekin.');
+								%>
+							</div>
+							<div class="small_icon cancel_reason lsw_weathers <% if (data.cancel_reason) print( data.cancel_reason ); %>" <% if (data.cancel_reason) {var reason_str=data.cancel_reason.replace(/_/,' ');print( ' title="'+reason_str.charAt(0).toUpperCase() + reason_str.slice(1)+'"' )} %>></div>
 						</div>
-						<% } %>
+					</div>
+					<% } %>
+				</div>
+				<%= template_column_name(data) %>
+				<div class="col c_sets">
+					<div class="col current_set">
+						<div class="row">
+							<div class="cell"><% if(data.player_retired)print('0');else print('-'); %></div>
+						</div>
+						<div class="row">
+							<div class="cell"><% if(data.player_retired)print('0');else print('-'); %></div>
+						</div>
 					</div>
 				</div>
-				<% if (data.is_cancelled) { %>
-				<div class="cancel_info">
-					<div class="inner_info">
-						<div class="text">
-							<%
-								if(data.is_cancelled=='is_delayed') print('Zakasn.');
-								else if(data.is_cancelled=='is_interrupted') print('Prekin.');
-							%>
+				<% if (typeof data.post_permalink != 'undefined') { %>
+				<div class="c_tv">
+					<div class="live_info">
+						<div class="inner_info">
+							<% if(typeof data.live_info != 'undefined'){ %>
+							<div class="big_icon tv_icon <%if (data.live_info == 'no_camera') print('opaque');%>"></div>
+							<div class="text <%if (data.live_info == 'no_camera') print('opaque no_camera');%>">
+								<%
+								if (data.live_info == 'no_camera') print('Nema TV prenosa');
+								else print ( 'Prenos' );
+								%>
+							</div>
+							<% } %>
 						</div>
-						<div class="small_icon cancel_reason lsw_weathers <% if (data.cancel_reason) print( data.cancel_reason ); %>" <% if (data.cancel_reason) {var reason_str=data.cancel_reason.replace(/_/,' ');print( ' title="'+reason_str.charAt(0).toUpperCase() + reason_str.slice(1)+'"' )} %>></div>
 					</div>
 				</div>
 				<% } %>
-			</div>
-			<%= template_column_name(data) %>
-			<div class="col c_sets">
-				<div class="col current_set">
-					<div class="row">
-						<div class="cell"><% if(data.player_retired)print('0');else print('-'); %></div>
-					</div>
-					<div class="row">
-						<div class="cell"><% if(data.player_retired)print('0');else print('-'); %></div>
-					</div>
-				</div>
-			</div>
-			<% if (typeof data.post_permalink != 'undefined') { %>
-			<div class="c_tv">
-				<div class="live_info">
-					<div class="inner_info">
-						<% if(typeof data.live_info != 'undefined'){ %>
-						<div class="big_icon tv_icon <%if (data.live_info == 'no_camera') print('opaque');%>"></div>
-						<div class="text <%if (data.live_info == 'no_camera') print('opaque no_camera');%>">
-							<%
-							if (data.live_info == 'no_camera') print('Nema TV prenosa');
-							else print ( 'Prenos' );
-							%>
-						</div>
-						<% } %>
-					</div>
-				</div>
-			</div>
-			<% } %>
-		</a>
-		</script>
+			</a>
+			</script>
 
 		<script type="text/template" id="template_result_row">
 		<a href="<% if (typeof data.post_permalink != 'undefined') print(data.post_permalink);else print('javascript:;'); %>" class="match_row <%= data.id %>">
@@ -680,6 +726,7 @@
 		<script type="text/javascript" src="js/index.js"></script>
 		<script type="text/javascript">
             app.initialize();
+			
 			//startapp(jQuery);//test
         </script>
 		
