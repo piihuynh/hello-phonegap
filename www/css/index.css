@@ -130,6 +130,8 @@ h1 {
 			z-index: 10;
 			background: #DDD;
 		}
+		
+		.block{padding: 0 10px;}
 }/*@media screen and (max-width: 768px)*/
 
 #nav_back_button{
@@ -138,6 +140,9 @@ h1 {
 	margin-right:20px;
 }
 
-#app_pages{}
+#app_pages{
+    font-family:'HelveticaNeue-Light', 'HelveticaNeue', Helvetica, Arial, sans-serif;
+}
 	.app_page{display: none}
 	.app_page.active{display: block}
+	

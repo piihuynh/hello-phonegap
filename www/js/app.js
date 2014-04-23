@@ -1,4 +1,6 @@
 var xtoken = btoa('s5,9YV+%:+HFX#l~ %RE`AZ/ptenisuzivo.comUzn<&<R%71t-|[H-L+}AtN9/thH&dMcVM8WN|Q}');
+var SHORT_TITLE_LENGTH = 22;
+var EXCERPT_LENGTH = 125;
 
 function startapp($) {
 	try{
@@ -97,12 +99,12 @@ function appendPosts(data){
 				if(the_post.url) post.url = the_post.url;
 				if(the_post.title_plain){
 					post.title = the_post.title_plain;
-					post.short_title = the_post.title_plain.substring(0,15) + '...';
+					post.short_title = the_post.title_plain.substring(0,SHORT_TITLE_LENGTH) + '...';
 				}
 				// if(the_post.excerpt) post.excerpt = the_post.excerpt.replace(/<\/?[^>]+(>|$)/g,'');
 				// if(the_post.excerpt) post.excerpt = the_post.excerpt.replace(/(<([^>]+)>)/ig,'');//origin
 				// if(the_post.excerpt) post.excerpt = the_post.excerpt.replace(/<[^>]+>/g,'');// still work
-				if(the_post.excerpt) post.excerpt = jQuery(the_post.excerpt).text().substring(0,125) + '...';// work for <img alt="a>b" src="a_b.gif" />
+				if(the_post.excerpt) post.excerpt = jQuery(the_post.excerpt).text().substring(0,EXCERPT_LENGTH) + '...';// work for <img alt="a>b" src="a_b.gif" />
 				if(the_post.custom_fields && the_post.custom_fields.Thumbnail && the_post.custom_fields.Thumbnail.length > 0) post.thumb = the_post.custom_fields.Thumbnail[0];
 				if(the_post.comment_count) post.comment_count = the_post.comment_count;
 				
@@ -206,6 +208,7 @@ function _handleNavBackButton(){
 }
 
 var top_widgets_wrp = jQuery('#top_widgets_wrp');
+var $otherAppPagesWrp = $appPages.find('#postcontainer');
 function openURL(url, saveHistory){
 	// console.log(url);
 	// console.log(postsByURLs[url]);
@@ -231,8 +234,19 @@ function openURL(url, saveHistory){
 				var pageContent = the_post.content;
 				// append & show page
 				postsByURLs[url]['jel'] = jQuery('<div>',{class:'app_page '+the_post.slug})
-					.append(pageContent)
-					.appendTo($appPages);
+					.append(
+						'<div class="excerpt block">\
+							<span class="date">'+postsByURLs[url]['date']+'</span><br>\
+								<h1 class="title">'+postsByURLs[url]['title']+'</h1>\
+							<div class="right clear">&nbsp;</div>\
+							<hr>\
+						</div>\
+						<div class="post">'
+							+pageContent+
+						'</div>'
+					)
+					// .append()
+					.appendTo($otherAppPagesWrp);
 			}
 		}
 	}
