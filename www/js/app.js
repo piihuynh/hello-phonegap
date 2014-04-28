@@ -171,8 +171,8 @@ var appPages = {};
 var $appPages = jQuery('#app_pages');
 
 function _displayAppPage(url){
-	// alert(url);
-	// alert(url===homeURL);
+	if (typeof postsByURLs[url] === 'undefined') return;
+	
 	$appPages.find('.app_page.active').removeClass('active');
 	if(url === homeURL){
 		$appPages.find('.app_page.home').addClass('active');
