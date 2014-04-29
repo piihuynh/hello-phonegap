@@ -16,7 +16,7 @@
  * specific language governing permissions and limitations
  * under the License.
  */
-var DEBUG = false;
+var DEBUG = 1;
 var REGISTRATION_EXPIRY_TIME_MS = 1000 * 3600 * 24 * 7;
 
 if (typeof window.localStorage === 'undefined'
@@ -251,6 +251,7 @@ function onNotificationAPN(event) {
 }
 
 function myLog(data){console.log(data)}
+if(DEBUG) jQuery('#log').show();
 
 // get timezone offset
 /* var utc_offset = 0;

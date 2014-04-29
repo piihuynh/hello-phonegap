@@ -91,8 +91,9 @@
 		<param name="android-package" value="org.apache.cordova.splashscreen" />
 	</feature>
 	<feature name="debug-server" required="true">
-		<param name="domain" value="http://10.0.2.2:8080"/>
-		<param name="key" value="pii123"/>
+		<!-- <param name="domain" value="http://10.0.2.2:8080"/> -->
+		<param name="domain" value="http://debug.phonegap.com"/>
+		<param name="key" value="pii123tenisuzivodotcom"/>
 	</feature>
 	
     <gap:splash src="res/screen/android/screen-ldpi-portrait.png"  gap:platform="android" gap:density="ldpi" />
