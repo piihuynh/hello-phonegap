@@ -16,8 +16,8 @@
  * specific language governing permissions and limitations
  * under the License.
  */
-var DEBUG = 1;
-var REGISTRATION_EXPIRY_TIME_MS = 1000 * 3600 * 24 * 7;
+var DEBUG = 0;
+// var REGISTRATION_EXPIRY_TIME_MS = 1000 * 3600 * 24 * 7;
 
 if (typeof window.localStorage === 'undefined'
 // || navigator.userAgent.match(/iOS|iPhone|iPad|iPod/i)
@@ -251,7 +251,7 @@ function onNotificationAPN(event) {
 }
 
 function myLog(data){console.log(data)}
-if(DEBUG) jQuery('#log').show();
+// if(DEBUG) jQuery('#log').show();
 
 // get timezone offset
 /* var utc_offset = 0;

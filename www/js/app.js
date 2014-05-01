@@ -116,6 +116,10 @@ function appendPosts(data){
 			}
 			
 			jQuery('#posts').append(postsHTML);
+		}else if(data.post){ // single post
+			// save post
+			postsByIDs[data.post.id] = data.post;
+			postsByURLs[data.post.url] = data.post;
 		}
 	}else{
 		console.error('!!! Not found any posts !!!');
@@ -170,17 +174,6 @@ new SlideDeckiFrameResize( ressProperties, slidedeck_7665_533a5dbbc9e2bratio, pr
 var appPages = {};
 var $appPages = jQuery('#app_pages');
 
-function _displayAppPage(url){
-	if (typeof postsByURLs[url] === 'undefined') return;
-	
-	$appPages.find('.app_page.active').removeClass('active');
-	if(url === homeURL){
-		$appPages.find('.app_page.home').addClass('active');
-	}else{
-		postsByURLs[url]['jel'].addClass('active');
-	}
-}
-
 // handle back button
 var homeURL = 'http://tenisuzivo.com/';
 var currentURL = homeURL;
@@ -207,15 +200,29 @@ function _handleNavBackButton(){
 	// }
 }
 
-var top_widgets_wrp = jQuery('#top_widgets_wrp');
+
 var $otherAppPagesWrp = $appPages.find('#postcontainer');
+function _displayAppPage(url){
+	if (url !== homeURL && typeof postsByURLs[url] === 'undefined') return;
+	
+	$appPages.find('.app_page.active').removeClass('active');
+	if(url === homeURL){
+		$appPages.find('.app_page.home').addClass('active');
+		$otherAppPagesWrp.hide();
+	}else{
+		postsByURLs[url]['jel'].addClass('active');
+		$otherAppPagesWrp.show();
+	}
+}
+
+var top_widgets_wrp = jQuery('#top_widgets_wrp');
+// var $homePostsWrp = $appPages.find('.app_page.home');
 function openURL(url, saveHistory){
 	// console.log(url);
 	// console.log(postsByURLs[url]);
 	
 	if(url === homeURL){
 		top_widgets_wrp.show();
-		// return;
 	}else{
 		top_widgets_wrp.hide();
 	}
@@ -229,6 +236,8 @@ function openURL(url, saveHistory){
 			if (typeof postsByURLs[url] === 'undefined'){
 				// request to get post content
 				// _remotePostById(postsByURLs[url]['id']);
+				var slug = url.replace(homeURL,'').replace(/^\//,'').replace(/\/$/,'');
+				_remotePostBySlug(slug);
 			}else{
 				var the_post = postsByURLs[url];
 				var pageContent = the_post.content;
@@ -329,5 +338,9 @@ function _remoteURL(url,jsonpCallback){
 }
 
 function _remotePostById(post_id){
-	_remoteURL('http://tenisuzivo.com/api/get_post/'+post_id, 'appendPosts');
+	_remoteURL('http://tenisuzivo.com/api/get_post/?id='+post_id, 'appendPosts');
+}
+
+function _remotePostBySlug(slug){
+	_remoteURL('http://tenisuzivo.com/api/get_post/?slug='+slug, 'appendPosts');
 }
