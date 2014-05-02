@@ -192,7 +192,6 @@ var app = {
 
 
 function onNotificationGCM(e) {
-	// app.log('here2');
 	switch( e.event )
 	{
 		case 'registered':
@@ -215,9 +214,9 @@ function onNotificationGCM(e) {
 		case 'message':
 		  // this is the actual push notification. its format depends on the data model
 		  // of the intermediary push server which must also be reflected in GCMIntentService.java
-		  app.log('onNotificationGCM e= ',e);
-		  app.log('onNotificationGCM e.message = '+e.message);
 		  alert(e.message);
+		  // app.log('onNotificationGCM e= ',e);
+		  app.log('onNotificationGCM e.message = '+e.message);
 		break;
 
 		case 'error':

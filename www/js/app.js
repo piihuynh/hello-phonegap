@@ -1,6 +1,9 @@
 var xtoken = btoa('s5,9YV+%:+HFX#l~ %RE`AZ/ptenisuzivo.comUzn<&<R%71t-|[H-L+}AtN9/thH&dMcVM8WN|Q}');
 var SHORT_TITLE_LENGTH = 22;
 var EXCERPT_LENGTH = 125;
+var $win = jQuery(window);
+var isAjaxForNextPage = true;
+var isOutOfPosts = false;
 
 function startapp($) {
 	try{
@@ -10,8 +13,10 @@ function startapp($) {
 		$('#mainPage').show();
 		
 		_remoteURL('http://tenisuzivo.com/api/get_recent_posts/',/* jsonpCallback:  */'appendPosts');
-			 
+		
 		_handleNavBackButton();
+		
+		_initInfiniteScroll();
 		
 	}catch(ex){alert(ex+'');}
 }
@@ -116,6 +121,9 @@ function appendPosts(data){
 			}
 			
 			jQuery('#posts').append(postsHTML);
+			
+			isAjaxForNextPage = false;
+			if (curPageNo == data.pages) isOutOfPosts = true;
 		}else if(data.post){ // single post
 			// save post
 			postsByIDs[data.post.id] = data.post;
@@ -127,8 +135,25 @@ function appendPosts(data){
 	}
 }
 
-function callbackAfterGetContent(){
-	jQuery("a[rel*=lightbox]").colorbox({speed:350,initialWidth:"300",initialHeight:"100",opacity:0.8,loop:false,scrolling:false,escKey:false,arrowKey:false,top:false,right:false,bottom:false,left:false});
+var pxFromBottom = 1500;
+var curScrollTop = 0;
+var footerWpr = jQuery('#footer_bg')[0];
+var $infscrLoading = jQuery('#infscr_loading');
+var curPageNo = 1;
+
+function _initInfiniteScroll(){
+	$win.on('scroll',function(){
+		// homepage only
+		if (currentURL !== homeURL || isAjaxForNextPage || footerWpr.offsetTop - jQuery(this).scrollTop() > pxFromBottom || isOutOfPosts) return;
+		// begin ajax
+		isAjaxForNextPage = true;
+		$infscrLoading.show();
+		_remoteRecentPostsOfPage(++curPageNo);
+	});
+}
+
+function _initInfiniteScroll2(){
+	// jQuery("a[rel*=lightbox]").colorbox({speed:350,initialWidth:"300",initialHeight:"100",opacity:0.8,loop:false,scrolling:false,escKey:false,arrowKey:false,top:false,right:false,bottom:false,left:false});
 	
 	if (!jQuery.infinitescroll) return;
 	var infinite_scroll = {
@@ -139,6 +164,7 @@ function callbackAfterGetContent(){
 		},
 		"nextSelector":".page-navigation a:first",
 		"navSelector":".page-navigation",
+		// "navSelector":"#postcontainer",
 		"itemSelector":".post, .infscr",
 		"contentSelector":"#posts, #postcontainer",
 	};
@@ -212,6 +238,8 @@ function _displayAppPage(url){
 	}else{
 		postsByURLs[url]['jel'].addClass('active');
 		$otherAppPagesWrp.show();
+	
+		$win.scrollTop(0);
 	}
 }
 
@@ -311,10 +339,11 @@ function _remoteURL(url,jsonpCallback){
 				console.error('error, ',jqXHR.statusCode(),' | ',textStatus,' | ',errorThrown);
 				alert('error, ' + jqXHR.statusCode() +' | '+ textStatus +' | '+ errorThrown);
 			},
-			// complete: function(jqXHR,textStatus){
+			complete: function(jqXHR,textStatus){
 				// console.log('complete, ',jqXHR.statusCode(),' | ',textStatus);
 				// alert('complete, ' + jqXHR.statusCode() +' | '+ textStatus);
-			// },
+				$infscrLoading.hide();
+			},
 			// statusCode: {
 				// 0: function(a,b,c) {
 					// console.log(a,b,c);
@@ -335,6 +364,10 @@ function _remoteURL(url,jsonpCallback){
 	});
 	
 
+}
+
+function _remoteRecentPostsOfPage(pageNo){
+	_remoteURL('http://tenisuzivo.com/api/get_recent_posts/?page='+pageNo, 'appendPosts');
 }
 
 function _remotePostById(post_id){
